@@ -1,15 +1,21 @@
+import { getAuth } from 'firebase/auth';
 import React from 'react';
-import useFirebase from '../../hooks/useFirebase';
+import app from '../../firebase/firebase.init';
+import { useSignInWithGoogle} from 'react-firebase-hooks/auth';
 import './Login.css';
 
+
+
+const auth = getAuth(app);
+
 const Login = () => {
-    const { signInWithGoogle } = useFirebase();
+const [signInWithGoogle, user] = useSignInWithGoogle(auth);
     return (
         <div>
             <h2>Login</h2>
             <div style={{ margin: '10px'}}>
                 <button
-                    onClick={signInWithGoogle}
+                    onClick={()=>signInWithGoogle()}
                 >Google Sign in</button>
            </div>
             <form action="">
